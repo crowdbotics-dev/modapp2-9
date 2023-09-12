@@ -13,3 +13,7 @@ class VerifySerializer(serializers.ModelSerializer):
         model = Verify
         fields = '__all__'
 
+
+class DummySerializer(serializers.Serializer):
+    name = serializers.CharField(required=False)
+    phone = serializers.CharField(required=False)

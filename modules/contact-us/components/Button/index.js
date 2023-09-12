@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10
+    borderRadius: 20
   },
   text: {
     fontWeight: "bold",
-    fontSize: 15
+    fontSize: 16
   }
 });
 export default Button;
