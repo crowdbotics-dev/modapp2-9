@@ -1,130 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   StyleSheet,
   View,
-  SafeAreaView,
-  FlatList,
-  Image
+  Image,
+  TextInput,
+  Pressable
 } from "react-native";
 
-const ArchiveContent = (params) => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData([
-      {
-        id: 1,
-        archiveDate: "7 MAR",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 2,
-        archiveDate: "10 APR",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 3,
-        archiveDate: "13 MAY",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 4,
-        archiveDate: "16 JUN",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 5,
-        archiveDate: "5 JAN",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 6,
-        archiveDate: "18 JUL",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 7,
-        archiveDate: "21 AUG",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 8,
-        archiveDate: "24 SEP",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 9,
-        archiveDate: "27 OCT",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 10,
-        archiveDate: "30 NOV",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 11,
-        archiveDate: "1 DEC",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 12,
-        archiveDate: "4 JAN",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 13,
-        archiveDate: "30 NOV",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 14,
-        archiveDate: "1 DEC",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 15,
-        archiveDate: "4 JAN",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 16,
-        archiveDate: "30 NOV",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 17,
-        archiveDate: "1 DEC",
-        imageSrc: require("./assets/crowdbotics.png")
-      },
-      {
-        id: 18,
-        archiveDate: "4 JAN",
-        imageSrc: require("./assets/crowdbotics.png")
-      }
-    ]);
-  }, []);
+const RateTheAppScreen = (params) => {
+  const [review, setReview] = useState("");
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        style={styles.list}
-        data={data}
-        numColumns={3}
-        renderItem={({ item }) => <Post post={item} />}
-        keyExtractor={(item) => item.id.toString()}
-        columnWrapperStyle={{
-          justifyContent: "space-between"
-        }}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.heading}>How was your experience?</Text>
+        <Text style={styles.subhHeading}>
+          Use 5 star rating to rate an app or leave a text review.
+        </Text>
+      </View>
+      <Image
+        source={require("./assets/5starsImage.png")}
+        style={styles.image}
       />
-    </SafeAreaView>
-  );
-};
-
-const Post = ({ post }) => {
-  return (
-    <View style={styles.postContainer}>
-      <Image source={post.imageSrc} style={styles.image} />
-      <Text style={styles.archiveDate}>{post.archiveDate}</Text>
+      <Image
+        source={require("./assets/separator.png")}
+        style={styles.separator}
+      />
+      <View style={styles.inputContainer}>
+        <Text style={styles.inputText}>Text review</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setReview(text)}
+          value={review}
+          placeholder="Enter"
+          placeholderTextColor="#9B9B9B"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
+      <Button buttonText={"Submit"} />
+      <Button buttonText={"Cancel"} outline={true} />
     </View>
   );
 };
@@ -132,36 +47,95 @@ const Post = ({ post }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    justifyContent: "center"
   },
-  list: {
+  header: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 50
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: "bold"
+  },
+  subhHeading: {
+    fontSize: 15,
+    lineHeight: 20,
     marginTop: 10,
-    flex: 1,
-    height: "100%"
-  },
-  postContainer: {
-    height: 125,
-    width: 125,
-    borderRadius: 10,
-    margin: 3
+    fontWeight: "bold",
+    textAlign: "center"
   },
   image: {
-    height: 125,
-    width: 125,
-    borderRadius: 10
+    alignSelf: "center"
   },
-  archiveDate: {
-    position: "absolute",
-    top: 5,
-    right: 5,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 6,
-    fontSize: 10,
-    fontWeight: "700",
-    textAlign: "center",
-    color: "#000"
+  separator: {
+    alignSelf: "center",
+    marginVertical: 30
+  },
+  inputContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    marginHorizontal: 20
+  },
+  inputText: {
+    fontSize: 16,
+    marginLeft: 20,
+    color: "#111112"
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#e6e6e6",
+    borderRadius: 10,
+    padding: 10,
+    paddingLeft: 20,
+    marginVertical: 10,
+    width: "100%",
+    height: 150
   }
 });
-export default ArchiveContent;
+export default RateTheAppScreen;
+
+const Button = ({ onPress, buttonText, outline }) => {
+  const btnStyle = {
+    backgroundColor: outline ? "#fff" : "#000",
+    borderColor: outline ? "#000" : "#fff",
+    borderWidth: 1
+  };
+  const btnText = {
+    color: outline ? "#000" : "#fff"
+  };
+  return (
+    <View style={buttonStyles.btnContainer}>
+      <Pressable style={[buttonStyles.btn, btnStyle]} onPress={onPress}>
+        <Text style={[buttonStyles.btnText, btnText]}>{buttonText}</Text>
+      </Pressable>
+    </View>
+  );
+};
+
+const buttonStyles = StyleSheet.create({
+  btnContainer: {
+    paddingTop: 10,
+    paddingHorizontal: 40,
+    justifyContent: "center",
+    marginTop: 20
+  },
+  btn: {
+    backgroundColor: "black",
+    height: 50,
+    width: "100%",
+    padding: 10,
+    paddingHorizontal: 25,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "rgba(0, 0, 0, 0.2)",
+    elevation: 10
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold"
+  }
+});
