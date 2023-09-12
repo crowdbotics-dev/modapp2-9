@@ -1,182 +1,184 @@
 import React, { useState } from "react";
 import {
   Text,
-  View,
   StyleSheet,
+  View,
+  SafeAreaView,
   TextInput,
-  ScrollView,
-  Pressable,
-  Image
+  Switch,
+  ScrollView
 } from "react-native";
 
-const SubscriptionTrial = () => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+const AccountSettingsScreen = (params) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [notifications, setNotifications] = useState(false);
+  const [emailNotifications, setEmailNotifications] = useState(false);
+  const [smsNotifications, setSmsNotifications] = useState(false);
+  const [deactivateAccount, setDeactivateAccount] = useState(false);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text style={styles.heading}>Free tiral period</Text>
-        <View style={styles.daysContainer}>
-          <Text style={styles.days}>30</Text>
-          <Text>Days</Text>
+        <View style={styles.subContainer}>
+          <Text style={styles.subText}>Subscription</Text>
+          <View style={styles.subPallet}>
+            <View style={styles.planDes}>
+              <Text style={[styles.fnt25, styles.boldText]}>Plan</Text>
+              <Text style={styles.fnt16}>Description</Text>
+            </View>
+            <View style={styles.subPricing}>
+              <Text style={[styles.fnt25, styles.boldText]}>$14.99 </Text>
+              <Text style={styles.fnt16}>per month</Text>
+            </View>
+          </View>
         </View>
-        <Text style={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non at sed.
-        </Text>
-        <View style={styles.separator}>
-          <View style={styles.bar} />
-          <Text style={styles.separatorText}>Or</Text>
-          <View style={styles.bar} />
+        <View style={styles.billingContainer}>
+          <Text style={styles.billingText}>Billing information</Text>
+          <View style={styles.nameInput}>
+            <Text style={styles.inputText}>Full Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your full name"
+              placeholderTextColor="#9B9B9B"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={name}
+              onChangeText={(text) => setName(text)}
+            />
+          </View>
+          <View style={styles.nameInput}>
+            <Text style={styles.inputText}>Email Address</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Email Address"
+              placeholderTextColor="#9B9B9B"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+            />
+          </View>
+          <View style={styles.nameInput}>
+            <Text style={styles.inputText}>Card number</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Card Number"
+              placeholderTextColor="#9B9B9B"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={cardNumber}
+              onChangeText={(text) => setCardNumber(text)}
+            />
+          </View>
         </View>
-        <Text style={styles.periodHeading}>Choose your period</Text>
-        <View style={styles.inputsContainer}>
-          <Input
-            text="Start date"
-            value={startDate}
-            onChange={setStartDate}
-            containerStyle={styles.input}
-          />
-          <Input
-            text="End date"
-            value={endDate}
-            onChange={setEndDate}
-            containerStyle={styles.input}
-          />
+        <View style={styles.togglesContainer}>
+          <View style={styles.toggle}>
+            <Text style={styles.toggleText}>Notifications</Text>
+            <Switch
+              style={styles.toggleSwitch}
+              value={notifications}
+              onValueChange={(value) => setNotifications(value)}
+            />
+          </View>
+          <View style={styles.toggle}>
+            <Text style={styles.toggleText}>Email Notifications</Text>
+            <Switch
+              style={styles.toggleSwitch}
+              value={emailNotifications}
+              onValueChange={(value) => setEmailNotifications(value)}
+            />
+          </View>
+          <View style={styles.toggle}>
+            <Text style={styles.toggleText}>SMS Notifications</Text>
+            <Switch
+              style={styles.toggleSwitch}
+              value={smsNotifications}
+              onValueChange={(value) => setSmsNotifications(value)}
+            />
+          </View>
+          <View style={styles.toggle}>
+            <Text style={styles.toggleText}>Deactivate Account</Text>
+            <Switch
+              style={styles.toggleSwitch}
+              value={deactivateAccount}
+              onValueChange={(value) => setDeactivateAccount(value)}
+            />
+          </View>
         </View>
-        <Button buttonText="Ok" style={styles.button} />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
   },
-  heading: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#000",
-    textAlign: "center"
-  },
-  daysContainer: {
-    width: 130,
-    height: 130,
-    borderRadius: 70,
-    borderColor: "#12D790",
-    borderWidth: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    marginVertical: 20
-  },
-  days: {
-    fontSize: 36,
-    fontWeight: "bold"
-  },
-  description: {
-    fontSize: 14,
-    color: "#888888",
-    textAlign: "center",
-    paddingHorizontal: 40
-  },
-  separator: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 20
-  },
-  bar: {
-    width: 100,
-    height: 1,
-    backgroundColor: "#e6e6e6"
-  },
-  separatorText: {
-    fontSize: 14,
-    color: "#888888",
-    marginHorizontal: 30
-  },
-  periodHeading: {
-    fontSize: 18,
-    color: "#000",
-    textAlign: "center",
-    marginVertical: 10,
-    fontWeight: "bold"
-  },
-  inputsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    padding: 20
-  },
-  input: {
-    flex: 1,
-    marginHorizontal: 5
-  },
-  button: {
-    marginHorizontal: 40,
-    marginTop: 60,
-    marginBottom: 20
-  }
-});
-
-export default SubscriptionTrial;
-
-const Input = props => {
-  return (
-    <View style={[inputStyles.inputContainer, props.containerStyle]}>
-      {props.text
-        ? (
-        <Text style={inputStyles.inputText}>{props.text}</Text>
-          )
-        : null}
-
-      <TextInput
-        style={[
-          inputStyles.input,
-          props.style,
-          props.textArea ? inputStyles.textArea : null
-        ]}
-        placeholder={props.placeholder ? props.placeholder : "Enter"}
-        value={props.value}
-        onChangeText={() => props.onChange()}
-        placeholderTextColor={
-          props.placeholderTextColor ? props.placeholderTextColor : "#9B9B9B"
-        }
-        editable={props.editable !== false}
-        autoCapitalize="none"
-        autoCorrect={false}
-        multiline={!!props.textArea}
-        backgroundColor={props.backgroundColor}
-        secureTextEntry={props.secureTextEntry}
-      />
-      {props.errorText
-        ? (
-        <Text style={inputStyles.error}>{props.errorText}</Text>
-          )
-        : null}
-      {props.icon
-        ? (
-        <Pressable
-          onPress={() => props.iconOnPress()}
-          style={inputStyles.iconWithText}>
-          <Image source={props.icon} style={inputStyles.icon} />
-        </Pressable>
-          )
-        : null}
-      <View style={styles.children}>{props.children}</View>
-    </View>
-  );
-};
-
-const inputStyles = StyleSheet.create({
-  inputContainer: {
-    flexDirection: "column",
+  subContainer: {
+    paddingHorizontal: 20,
+    flex: 0.2,
     justifyContent: "center"
   },
+  subText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    padding: 2,
+    marginVertical: 12,
+    marginLeft: 20
+  },
+  subPallet: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#e6e6e6",
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  planDes: {
+    flex: 0.4,
+    padding: 10,
+    // borderWidth: 1,
+    // borderColor: '#979797',
+    justifyContent: "center",
+    alignItems: "flex-start"
+  },
+  subPricing: {
+    flex: 0.6,
+    padding: 10,
+    // borderWidth: 1,
+    // borderColor: '#979797',
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "center"
+  },
+  boldText: {
+    fontWeight: "bold"
+  },
+  fnt25: {
+    fontSize: 25
+  },
+  fnt16: {
+    fontSize: 16
+  },
+  billingContainer: {
+    flex: 0.5,
+    paddingHorizontal: 20 // borderWidth: 1,
+    // borderColor: '#979797',
+  },
+  billingText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    padding: 2,
+    marginVertical: 12,
+    marginLeft: 20
+  },
   inputText: {
-    fontSize: 14,
-    marginLeft: 20,
-    color: "#111112"
+    fontSize: 16,
+    marginLeft: 20
   },
   input: {
     borderWidth: 1,
@@ -185,91 +187,23 @@ const inputStyles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     marginVertical: 10,
-    width: "100%",
-    height: 50,
-    color: "#000"
+    width: "100%"
   },
-  iconWithText: {
-    position: "absolute",
-    right: 30,
-    bottom: 25,
-    width: 20,
-    height: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1
+  togglesContainer: {
+    flex: 0.3,
+    paddingHorizontal: 20
   },
-  icon: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain"
-  },
-  textArea: {
-    height: 150
-  },
-  children: {}
-});
-
-const Button = params => {
-  const backgroundColor = params.backgroundColor || "#000";
-  const textColor = params.textColor || "#fff";
-  const btnStyle = {
-    backgroundColor: backgroundColor,
-    borderColor: params.borderColor || backgroundColor,
-    borderWidth: 1
-  };
-  const btnText = {
-    color: textColor
-  };
-  return (
-    <View style={[buttonStyles.btnContainer, params.style]}>
-      <View style={!params.hideShadow ? buttonStyles.shadowContainer : null}>
-        <Pressable
-          style={[buttonStyles.btn, btnStyle]}
-          onPress={params.onPress}>
-          <Text style={[buttonStyles.btnText, btnText]}>
-            {params.buttonText}
-          </Text>
-          <View style={styles.childrenContainer}>{params.children}</View>
-        </Pressable>
-      </View>
-    </View>
-  );
-};
-
-const buttonStyles = StyleSheet.create({
-  btnContainer: {
-    justifyContent: "center"
-  },
-  shadowContainer: {
-    shadowColor: "rgba(0, 0, 0, 0.5)",
-    shadowOffset: {
-      width: 0,
-      height: 5
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 10,
-    backgroundColor: "#fff",
-    borderRadius: 10
-  },
-  btn: {
-    height: 50,
-    padding: 10,
-    paddingHorizontal: 25,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-
-    flexDirection: "row"
-  },
-  btnText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold"
-  },
-  childrenContainer: {
-    justifyContent: "center",
+  toggle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center"
+  },
+  toggleText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    padding: 2,
+    marginVertical: 12,
+    marginLeft: 20
   }
 });
+export default AccountSettingsScreen;
